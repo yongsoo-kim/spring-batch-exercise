@@ -64,6 +64,7 @@ public class JobParamAndScopeConfiguration {
         };
     }
 
+    @Bean
     public Step scopeStep3() {
         log.info(">>> step3");
         return stepBuilderFactory.get("simpleStep3")
