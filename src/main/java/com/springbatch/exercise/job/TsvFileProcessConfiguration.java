@@ -1,6 +1,8 @@
 package com.springbatch.exercise.job;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springbatch.exercise.domain.SSItem;
+import com.springbatch.exercise.domain.SSItemResponseModel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -38,6 +40,7 @@ public class TsvFileProcessConfiguration {
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
+    private final ObjectMapper objectMapper;
 
 //    This is also working.
 //    @Bean
@@ -46,8 +49,19 @@ public class TsvFileProcessConfiguration {
 //    }
 
     // You can do more setting with this style.
+//    @Bean
+//    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+//
+//
+//        // Do any additional configuration here
+//        return builder.build();
+//    }
+
+
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
+
+
         // Do any additional configuration here
         return builder.build();
     }
@@ -56,7 +70,7 @@ public class TsvFileProcessConfiguration {
     private RestTemplate restTemplate;
 
 
-    private final static String GET_BASE_URL="http://localhost:3000/users";
+    private final static String GET_BASE_URL="http://localhost:3000/item";
 
     private final static int CHUNK_SIZE=10;
 
@@ -108,8 +122,10 @@ public class TsvFileProcessConfiguration {
                     headers.setContentType(MediaType.APPLICATION_JSON);
                     ResponseEntity<String> response = restTemplate.getForEntity(GET_BASE_URL,String.class);
                     System.out.println(response.getStatusCode());
-                    System.out.println(response.getBody());
+                    String json = response.getBody();
+                    SSItemResponseModel ttt = objectMapper.readValue(json, SSItemResponseModel.class);
                     System.out.println(item);
+                    System.out.println(ttt);
                 }
             }
         };
