@@ -24,15 +24,15 @@ public class RestTemplateConfig {
         clientHttpRequestFactory.setHttpClient(httpClient);
         return clientHttpRequestFactory;
     }
-//
-//    @Bean
-//    public RestTemplate restTemplate() {
-//        return new RestTemplateBuilder()
-//                .requestFactory(this::clientHttpRequestFactory)
-//                .errorHandler(new CustomClientErrorHandler())
-//                .interceptors(new CustomClientHttpRequestInterceptor())
-//                .build();
-//    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplateBuilder()
+                .requestFactory(this::clientHttpRequestFactory)
+                .errorHandler(new CustomClientErrorHandler())
+                .interceptors(new CustomClientHttpRequestInterceptor())
+                .build();
+    }
 
 
 }

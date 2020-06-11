@@ -41,6 +41,7 @@ public class TsvFileProcessConfiguration {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
     private final ObjectMapper objectMapper;
+    private final RestTemplate restTemplate;
 
 //    This is also working.
 //    @Bean
@@ -58,19 +59,19 @@ public class TsvFileProcessConfiguration {
 //    }
 
 
-    @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+//    @Bean
+//    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+//
+//
+//        // Do any additional configuration here
+//        return builder.build();
+//    }
 
 
-        // Do any additional configuration here
-        return builder.build();
-    }
 
-
-
-
-    @Autowired
-    private RestTemplate restTemplate;
+//
+//    @Autowired
+//    private RestTemplate restTemplate;
 
 
     private final static String GET_BASE_URL="http://localhost:3000/item";
@@ -121,6 +122,7 @@ public class TsvFileProcessConfiguration {
             public void write(List<? extends SSItem> items) throws Exception {
                 for(SSItem item: items) {
 
+
                     HttpHeaders headers = new HttpHeaders();
                     headers.setContentType(MediaType.APPLICATION_JSON);
                     ResponseEntity<String> response = restTemplate.getForEntity(GET_BASE_URL,String.class);
@@ -129,6 +131,9 @@ public class TsvFileProcessConfiguration {
                     SSItemResponseModel ttt = objectMapper.readValue(json, SSItemResponseModel.class);
                     System.out.println(item);
                     System.out.println(ttt);
+                    Thread currentThread = Thread.currentThread();
+                    System.out.println(currentThread.getId());
+                    System.out.println(currentThread.getName());
                 }
             }
         };

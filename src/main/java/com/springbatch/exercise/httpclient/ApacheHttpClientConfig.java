@@ -26,7 +26,8 @@ import static com.springbatch.exercise.httpclient.HttpClientConfigConstants.*;
 @EnableScheduling
 public class ApacheHttpClientConfig {
 
-
+    //How to manage this client:
+    //https://www.baeldung.com/httpclient-connection-management
 
     @Bean
     public PoolingHttpClientConnectionManager poolingConnectionManager() {
@@ -69,28 +70,28 @@ public class ApacheHttpClientConfig {
     }
 
 
-    @Bean
-    public Runnable idleConnectionMonitor(PoolingHttpClientConnectionManager pool) {
-        return new Runnable() {
-            @Override
-            @Scheduled(fixedDelay = 20000)
-            public void run() {
-                // only if connection pool is initialised
-                if (pool != null) {
-                    pool.closeExpiredConnections();
-                    pool.closeIdleConnections(IDLE_CONNECTION_WAIT_TIME, TimeUnit.MILLISECONDS);
-                }
-            }
-        };
-    }
-
-    @Bean
-    public TaskScheduler taskScheduler() {
-        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
-        scheduler.setThreadNamePrefix("idleMonitor");
-        scheduler.setPoolSize(5);
-        return scheduler;
-    }
+//    @Bean
+//    public Runnable idleConnectionMonitor(PoolingHttpClientConnectionManager pool) {
+//        return new Runnable() {
+//            @Override
+//            @Scheduled(fixedDelay = 20000)
+//            public void run() {
+//                // only if connection pool is initialised
+//                if (pool != null) {
+//                    pool.closeExpiredConnections();
+//                    pool.closeIdleConnections(IDLE_CONNECTION_WAIT_TIME, TimeUnit.MILLISECONDS);
+//                }
+//            }
+//        };
+//    }
+//
+//    @Bean
+//    public TaskScheduler taskScheduler() {
+//        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+//        scheduler.setThreadNamePrefix("idleMonitor");
+//        scheduler.setPoolSize(5);
+//        return scheduler;
+//    }
 
     @Bean
     public CloseableHttpClient httpClient() {
