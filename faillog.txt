@@ -1,0 +1,356 @@
+"C:\Program Files\Java\jdk-11.0.6\bin\java.exe" -XX:TieredStopAtLevel=1 -noverify -Dspring.profiles.active=mysql -Dspring.output.ansi.enabled=always -Dcom.sun.management.jmxremote -Dspring.jmx.enabled=true -Dspring.liveBeansView.mbeanDomain -Dspring.application.admin.enabled=true -javaagent:C:\Users\yongs\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\201.7223.91\lib\idea_rt.jar=7260:C:\Users\yongs\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\201.7223.91\bin -Dfile.encoding=UTF-8 -classpath C:\Users\yongs\OneDrive\Desktop\personal_projects\java\spring-batch-exercise\target\classes;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot-starter-batch\2.3.0.RELEASE\spring-boot-starter-batch-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot-starter\2.3.0.RELEASE\spring-boot-starter-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot\2.3.0.RELEASE\spring-boot-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\2.3.0.RELEASE\spring-boot-autoconfigure-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot-starter-logging\2.3.0.RELEASE\spring-boot-starter-logging-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\ch\qos\logback\logback-classic\1.2.3\logback-classic-1.2.3.jar;C:\Users\yongs\.m2\repository\ch\qos\logback\logback-core\1.2.3\logback-core-1.2.3.jar;C:\Users\yongs\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.13.2\log4j-to-slf4j-2.13.2.jar;C:\Users\yongs\.m2\repository\org\apache\logging\log4j\log4j-api\2.13.2\log4j-api-2.13.2.jar;C:\Users\yongs\.m2\repository\org\slf4j\jul-to-slf4j\1.7.30\jul-to-slf4j-1.7.30.jar;C:\Users\yongs\.m2\repository\jakarta\annotation\jakarta.annotation-api\1.3.5\jakarta.annotation-api-1.3.5.jar;C:\Users\yongs\.m2\repository\org\yaml\snakeyaml\1.26\snakeyaml-1.26.jar;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\2.3.0.RELEASE\spring-boot-starter-jdbc-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\com\zaxxer\HikariCP\3.4.5\HikariCP-3.4.5.jar;C:\Users\yongs\.m2\repository\org\springframework\batch\spring-batch-core\4.2.2.RELEASE\spring-batch-core-4.2.2.RELEASE.jar;C:\Users\yongs\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.11.0\jackson-databind-2.11.0.jar;C:\Users\yongs\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.11.0\jackson-annotations-2.11.0.jar;C:\Users\yongs\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.11.0\jackson-core-2.11.0.jar;C:\Users\yongs\.m2\repository\io\micrometer\micrometer-core\1.5.1\micrometer-core-1.5.1.jar;C:\Users\yongs\.m2\repository\org\hdrhistogram\HdrHistogram\2.1.12\HdrHistogram-2.1.12.jar;C:\Users\yongs\.m2\repository\org\latencyutils\LatencyUtils\2.0.3\LatencyUtils-2.0.3.jar;C:\Users\yongs\.m2\repository\javax\batch\javax.batch-api\1.0\javax.batch-api-1.0.jar;C:\Users\yongs\.m2\repository\org\codehaus\jettison\jettison\1.2\jettison-1.2.jar;C:\Users\yongs\.m2\repository\org\springframework\batch\spring-batch-infrastructure\4.2.2.RELEASE\spring-batch-infrastructure-4.2.2.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\retry\spring-retry\1.2.5.RELEASE\spring-retry-1.2.5.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-aop\5.2.6.RELEASE\spring-aop-5.2.6.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-beans\5.2.6.RELEASE\spring-beans-5.2.6.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-context\5.2.6.RELEASE\spring-context-5.2.6.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-tx\5.2.6.RELEASE\spring-tx-5.2.6.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot-starter-web\2.3.0.RELEASE\spring-boot-starter-web-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot-starter-json\2.3.0.RELEASE\spring-boot-starter-json-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.11.0\jackson-datatype-jdk8-2.11.0.jar;C:\Users\yongs\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.11.0\jackson-datatype-jsr310-2.11.0.jar;C:\Users\yongs\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.11.0\jackson-module-parameter-names-2.11.0.jar;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\2.3.0.RELEASE\spring-boot-starter-tomcat-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\9.0.35\tomcat-embed-core-9.0.35.jar;C:\Users\yongs\.m2\repository\org\glassfish\jakarta.el\3.0.3\jakarta.el-3.0.3.jar;C:\Users\yongs\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\9.0.35\tomcat-embed-websocket-9.0.35.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-web\5.2.6.RELEASE\spring-web-5.2.6.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-webmvc\5.2.6.RELEASE\spring-webmvc-5.2.6.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-expression\5.2.6.RELEASE\spring-expression-5.2.6.RELEASE.jar;C:\Users\yongs\.m2\repository\org\apache\httpcomponents\httpclient\4.5.12\httpclient-4.5.12.jar;C:\Users\yongs\.m2\repository\org\apache\httpcomponents\httpcore\4.4.13\httpcore-4.4.13.jar;C:\Users\yongs\.m2\repository\commons-codec\commons-codec\1.14\commons-codec-1.14.jar;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot-starter-data-jdbc\2.3.0.RELEASE\spring-boot-starter-data-jdbc-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\data\spring-data-jdbc\2.0.0.RELEASE\spring-data-jdbc-2.0.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\data\spring-data-relational\2.0.0.RELEASE\spring-data-relational-2.0.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\data\spring-data-commons\2.3.0.RELEASE\spring-data-commons-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\slf4j\slf4j-api\1.7.30\slf4j-api-1.7.30.jar;C:\Users\yongs\.m2\repository\com\h2database\h2\1.4.200\h2-1.4.200.jar;C:\Users\yongs\.m2\repository\mysql\mysql-connector-java\8.0.20\mysql-connector-java-8.0.20.jar;C:\Users\yongs\.m2\repository\org\projectlombok\lombok\1.18.12\lombok-1.18.12.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-core\5.2.6.RELEASE\spring-core-5.2.6.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-jcl\5.2.6.RELEASE\spring-jcl-5.2.6.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-jdbc\5.2.6.RELEASE\spring-jdbc-5.2.6.RELEASE.jar com.springbatch.exercise.SpringBatchExerciseApplication --job.name=tsvFileProcessJob inputFile=C:\Users\yongs\OneDrive\Desktop\personal_projects\java\spring-batch-exercise\sample-data.tsv
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.3.0.RELEASE)
+
+2020-06-13 07:52:45.819  INFO 10296 --- [           main] c.s.e.SpringBatchExerciseApplication     : Starting SpringBatchExerciseApplication on LAPTOP-ISSV75N4 with PID 10296 (C:\Users\yongs\OneDrive\Desktop\personal_projects\java\spring-batch-exercise\target\classes started by yongs in C:\Users\yongs\OneDrive\Desktop\personal_projects\java\spring-batch-exercise)
+2020-06-13 07:52:45.823  INFO 10296 --- [           main] c.s.e.SpringBatchExerciseApplication     : The following profiles are active: mysql
+2020-06-13 07:52:46.488  INFO 10296 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2020-06-13 07:52:46.507  INFO 10296 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15ms. Found 0 JDBC repository interfaces.
+2020-06-13 07:52:46.954  INFO 10296 --- [           main] c.s.e.job.JobParamAndScopeConfiguration  : >>> step3
+2020-06-13 07:52:46.985  INFO 10296 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService
+2020-06-13 07:52:46.986  INFO 10296 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'taskExecutor'
+2020-06-13 07:52:47.029  INFO 10296 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-06-13 07:52:47.126  INFO 10296 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-06-13 07:52:47.165  INFO 10296 --- [           main] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: MYSQL
+2020-06-13 07:52:47.175  INFO 10296 --- [           main] o.s.b.c.l.support.SimpleJobLauncher      : No TaskExecutor has been set, defaulting to synchronous executor.
+2020-06-13 07:52:47.290  INFO 10296 --- [           main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2020-06-13 07:52:47.310  INFO 10296 --- [           main] c.s.e.SpringBatchExerciseApplication     : Started SpringBatchExerciseApplication in 1.982 seconds (JVM running for 3.359)
+2020-06-13 07:52:47.311  INFO 10296 --- [           main] o.s.b.a.b.JobLauncherApplicationRunner   : Running default command line with: [inputFile=C:\Users\yongs\OneDrive\Desktop\personal_projects\java\spring-batch-exercise\sample-data.tsv]
+2020-06-13 07:52:47.402  INFO 10296 --- [           main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=tsvFileProcessJob]] launched with the following parameters: [{inputFile=C:\Users\yongs\OneDrive\Desktop\personal_projects\java\spring-batch-exercise\sample-data.tsv, run.id=40, version=6}]
+2020-06-13 07:52:47.447  INFO 10296 --- [           main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [partitionStep]
+2020-06-13 07:52:47.559 ERROR 10296 --- [ taskExecutor-3] o.s.batch.core.step.AbstractStep         : Encountered an error executing step tsvFileProcessStep in job tsvFileProcessJob
+
+org.springframework.batch.item.file.FlatFileParseException: Parsing error at line: 6 in resource=[class path resource [input/sample-data-part2.tsv]], input=[kkkkk	222222]
+	at org.springframework.batch.item.file.FlatFileItemReader.doRead(FlatFileItemReader.java:189) ~[spring-batch-infrastructure-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.item.support.AbstractItemCountingItemStreamItemReader.read(AbstractItemCountingItemStreamItemReader.java:93) ~[spring-batch-infrastructure-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.item.support.AbstractItemCountingItemStreamItemReader$$FastClassBySpringCGLIB$$ebb633d0.invoke(<generated>) ~[spring-batch-infrastructure-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.2.6.RELEASE.jar:5.2.6.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771) ~[spring-aop-5.2.6.RELEASE.jar:5.2.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.2.6.RELEASE.jar:5.2.6.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749) ~[spring-aop-5.2.6.RELEASE.jar:5.2.6.RELEASE]
+	at org.springframework.aop.support.DelegatingIntroductionInterceptor.doProceed(DelegatingIntroductionInterceptor.java:136) ~[spring-aop-5.2.6.RELEASE.jar:5.2.6.RELEASE]
+	at org.springframework.aop.support.DelegatingIntroductionInterceptor.invoke(DelegatingIntroductionInterceptor.java:124) ~[spring-aop-5.2.6.RELEASE.jar:5.2.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.6.RELEASE.jar:5.2.6.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749) ~[spring-aop-5.2.6.RELEASE.jar:5.2.6.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691) ~[spring-aop-5.2.6.RELEASE.jar:5.2.6.RELEASE]
+	at org.springframework.batch.item.file.FlatFileItemReader$$EnhancerBySpringCGLIB$$3d7c5e21.read(<generated>) ~[spring-batch-infrastructure-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.core.step.item.SimpleChunkProvider.doRead(SimpleChunkProvider.java:99) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.core.step.item.SimpleChunkProvider.read(SimpleChunkProvider.java:180) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.core.step.item.SimpleChunkProvider$1.doInIteration(SimpleChunkProvider.java:126) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.repeat.support.RepeatTemplate.getNextResult(RepeatTemplate.java:375) ~[spring-batch-infrastructure-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.repeat.support.RepeatTemplate.executeInternal(RepeatTemplate.java:215) ~[spring-batch-infrastructure-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.repeat.support.RepeatTemplate.iterate(RepeatTemplate.java:145) ~[spring-batch-infrastructure-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.core.step.item.SimpleChunkProvider.provide(SimpleChunkProvider.java:118) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.core.step.item.ChunkOrientedTasklet.execute(ChunkOrientedTasklet.java:71) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.core.step.tasklet.TaskletStep$ChunkTransactionCallback.doInTransaction(TaskletStep.java:407) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.core.step.tasklet.TaskletStep$ChunkTransactionCallback.doInTransaction(TaskletStep.java:331) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140) ~[spring-tx-5.2.6.RELEASE.jar:5.2.6.RELEASE]
+	at org.springframework.batch.core.step.tasklet.TaskletStep$2.doInChunkContext(TaskletStep.java:273) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.core.scope.context.StepContextRepeatCallback.doInIteration(StepContextRepeatCallback.java:82) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.repeat.support.RepeatTemplate.getNextResult(RepeatTemplate.java:375) ~[spring-batch-infrastructure-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.repeat.support.RepeatTemplate.executeInternal(RepeatTemplate.java:215) ~[spring-batch-infrastructure-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.repeat.support.RepeatTemplate.iterate(RepeatTemplate.java:145) ~[spring-batch-infrastructure-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.core.step.tasklet.TaskletStep.doExecute(TaskletStep.java:258) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.core.step.AbstractStep.execute(AbstractStep.java:208) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.core.partition.support.TaskExecutorPartitionHandler$1.call(TaskExecutorPartitionHandler.java:138) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.core.partition.support.TaskExecutorPartitionHandler$1.call(TaskExecutorPartitionHandler.java:135) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:834) ~[na:na]
+Caused by: java.lang.NumberFormatException: Unparseable number: kkkkk
+	at org.springframework.batch.item.file.transform.DefaultFieldSet.parseNumber(DefaultFieldSet.java:759) ~[spring-batch-infrastructure-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.item.file.transform.DefaultFieldSet.readInt(DefaultFieldSet.java:323) ~[spring-batch-infrastructure-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.item.file.transform.DefaultFieldSet.readInt(DefaultFieldSet.java:335) ~[spring-batch-infrastructure-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at com.springbatch.exercise.job.TsvFileProcessConfiguration$SSItemSetMapper.mapFieldSet(TsvFileProcessConfiguration.java:204) ~[classes/:na]
+	at com.springbatch.exercise.job.TsvFileProcessConfiguration$SSItemSetMapper.mapFieldSet(TsvFileProcessConfiguration.java:199) ~[classes/:na]
+	at org.springframework.batch.item.file.mapping.DefaultLineMapper.mapLine(DefaultLineMapper.java:43) ~[spring-batch-infrastructure-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.item.file.FlatFileItemReader.doRead(FlatFileItemReader.java:185) ~[spring-batch-infrastructure-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	... 36 common frames omitted
+
+2020-06-13 07:52:47.562  INFO 10296 --- [ taskExecutor-3] o.s.batch.core.step.AbstractStep         : Step: [tsvFileProcessStep:partition1] executed in 66ms
+2020-06-13 07:52:47.575  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:47.575  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:47.575  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:47.575  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:47.575  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:52:47.575  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+160
+taskExecutor-1
+2020-06-13 07:52:49.051  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:49.051  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:49.051  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:49.051  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:49.051  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:52:49.051  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:52:50.008  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:50.009  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:50.009  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:52:50.010  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:50.010  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:50.010  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+200 OK
+2020-06-13 07:52:51.009  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:51.010  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:52:51.010  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:52:51.010  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:51.010  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:51.010  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:52:52.009  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:52.009  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:52.009  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:52:52.011  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:52.011  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:52.011  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:52:53.010  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:53.010  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:53.010  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:52:53.010  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:53.010  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:53.010  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:52:54.008  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:54.008  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:54.008  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:54.009  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:54.009  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:52:54.009  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:52:55.009  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:55.009  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:55.009  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:52:55.010  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:55.010  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:55.010  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+200 OK
+2020-06-13 07:52:56.008  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:56.008  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:56.009  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:52:56.010  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:56.010  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:56.010  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:52:57.010  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:57.010  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:57.010  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:57.010  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:52:57.010  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:57.010  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:52:58.023  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:58.023  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:58.023  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:58.023  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:58.023  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:52:58.023  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:52:59.009  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:59.009  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:59.009  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:52:59.009  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:52:59.009  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:52:59.009  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:53:00.010  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:53:00.010  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:53:00.011  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:53:01.007  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:53:01.008  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:53:01.008  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:53:01.012  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:53:01.012  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:53:01.012  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:53:02.009  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:53:02.009  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:53:02.009  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:53:02.010  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:53:02.010  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:53:02.010  INFO 10296 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:53:03.013  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:53:03.013  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:53:03.013  INFO 10296 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:53:03.027  INFO 10296 --- [ taskExecutor-2] o.s.batch.core.step.AbstractStep         : Step: [tsvFileProcessStep:partition2] executed in 15s531ms
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=999999, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:53:04.018  INFO 10296 --- [ taskExecutor-1] o.s.batch.core.step.AbstractStep         : Step: [tsvFileProcessStep:partition0] executed in 16s522ms
+2020-06-13 07:53:04.026 ERROR 10296 --- [           main] o.s.batch.core.step.AbstractStep         : Encountered an error executing step partitionStep in job tsvFileProcessJob
+
+org.springframework.batch.core.JobExecutionException: Partition handler returned an unsuccessful step
+	at org.springframework.batch.core.partition.support.PartitionStep.doExecute(PartitionStep.java:112) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.core.step.AbstractStep.execute(AbstractStep.java:208) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.core.job.SimpleStepHandler.handleStep(SimpleStepHandler.java:148) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.core.job.AbstractJob.handleStep(AbstractJob.java:410) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.core.job.SimpleJob.doExecute(SimpleJob.java:136) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.core.job.AbstractJob.execute(AbstractJob.java:319) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.batch.core.launch.support.SimpleJobLauncher$1.run(SimpleJobLauncher.java:147) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.core.task.SyncTaskExecutor.execute(SyncTaskExecutor.java:50) ~[spring-core-5.2.6.RELEASE.jar:5.2.6.RELEASE]
+	at org.springframework.batch.core.launch.support.SimpleJobLauncher.run(SimpleJobLauncher.java:140) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344) ~[spring-aop-5.2.6.RELEASE.jar:5.2.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.2.6.RELEASE.jar:5.2.6.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.2.6.RELEASE.jar:5.2.6.RELEASE]
+	at org.springframework.batch.core.configuration.annotation.SimpleBatchConfiguration$PassthruAdvice.invoke(SimpleBatchConfiguration.java:127) ~[spring-batch-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.6.RELEASE.jar:5.2.6.RELEASE]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212) ~[spring-aop-5.2.6.RELEASE.jar:5.2.6.RELEASE]
+	at com.sun.proxy.$Proxy53.run(Unknown Source) ~[na:na]
+	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.execute(JobLauncherApplicationRunner.java:199) ~[spring-boot-autoconfigure-2.3.0.RELEASE.jar:2.3.0.RELEASE]
+	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.executeLocalJobs(JobLauncherApplicationRunner.java:173) ~[spring-boot-autoconfigure-2.3.0.RELEASE.jar:2.3.0.RELEASE]
+	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.launchJobFromProperties(JobLauncherApplicationRunner.java:160) ~[spring-boot-autoconfigure-2.3.0.RELEASE.jar:2.3.0.RELEASE]
+	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.run(JobLauncherApplicationRunner.java:155) ~[spring-boot-autoconfigure-2.3.0.RELEASE.jar:2.3.0.RELEASE]
+	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.run(JobLauncherApplicationRunner.java:150) ~[spring-boot-autoconfigure-2.3.0.RELEASE.jar:2.3.0.RELEASE]
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:786) ~[spring-boot-2.3.0.RELEASE.jar:2.3.0.RELEASE]
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:776) ~[spring-boot-2.3.0.RELEASE.jar:2.3.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:322) ~[spring-boot-2.3.0.RELEASE.jar:2.3.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) ~[spring-boot-2.3.0.RELEASE.jar:2.3.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.3.0.RELEASE.jar:2.3.0.RELEASE]
+	at com.springbatch.exercise.SpringBatchExerciseApplication.main(SpringBatchExerciseApplication.java:13) ~[classes/:na]
+
+2020-06-13 07:53:04.028  INFO 10296 --- [           main] o.s.batch.core.step.AbstractStep         : Step: [partitionStep] executed in 16s581ms
+2020-06-13 07:53:04.045  INFO 10296 --- [           main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=tsvFileProcessJob]] completed with the following parameters: [{inputFile=C:\Users\yongs\OneDrive\Desktop\personal_projects\java\spring-batch-exercise\sample-data.tsv, run.id=40, version=6}] and the following status: [FAILED] in 16s623ms

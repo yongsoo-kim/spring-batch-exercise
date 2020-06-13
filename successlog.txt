@@ -1,0 +1,391 @@
+"C:\Program Files\Java\jdk-11.0.6\bin\java.exe" -XX:TieredStopAtLevel=1 -noverify -Dspring.profiles.active=mysql -Dspring.output.ansi.enabled=always -Dcom.sun.management.jmxremote -Dspring.jmx.enabled=true -Dspring.liveBeansView.mbeanDomain -Dspring.application.admin.enabled=true -javaagent:C:\Users\yongs\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\201.7223.91\lib\idea_rt.jar=6973:C:\Users\yongs\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\201.7223.91\bin -Dfile.encoding=UTF-8 -classpath C:\Users\yongs\OneDrive\Desktop\personal_projects\java\spring-batch-exercise\target\classes;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot-starter-batch\2.3.0.RELEASE\spring-boot-starter-batch-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot-starter\2.3.0.RELEASE\spring-boot-starter-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot\2.3.0.RELEASE\spring-boot-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\2.3.0.RELEASE\spring-boot-autoconfigure-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot-starter-logging\2.3.0.RELEASE\spring-boot-starter-logging-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\ch\qos\logback\logback-classic\1.2.3\logback-classic-1.2.3.jar;C:\Users\yongs\.m2\repository\ch\qos\logback\logback-core\1.2.3\logback-core-1.2.3.jar;C:\Users\yongs\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.13.2\log4j-to-slf4j-2.13.2.jar;C:\Users\yongs\.m2\repository\org\apache\logging\log4j\log4j-api\2.13.2\log4j-api-2.13.2.jar;C:\Users\yongs\.m2\repository\org\slf4j\jul-to-slf4j\1.7.30\jul-to-slf4j-1.7.30.jar;C:\Users\yongs\.m2\repository\jakarta\annotation\jakarta.annotation-api\1.3.5\jakarta.annotation-api-1.3.5.jar;C:\Users\yongs\.m2\repository\org\yaml\snakeyaml\1.26\snakeyaml-1.26.jar;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\2.3.0.RELEASE\spring-boot-starter-jdbc-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\com\zaxxer\HikariCP\3.4.5\HikariCP-3.4.5.jar;C:\Users\yongs\.m2\repository\org\springframework\batch\spring-batch-core\4.2.2.RELEASE\spring-batch-core-4.2.2.RELEASE.jar;C:\Users\yongs\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.11.0\jackson-databind-2.11.0.jar;C:\Users\yongs\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.11.0\jackson-annotations-2.11.0.jar;C:\Users\yongs\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.11.0\jackson-core-2.11.0.jar;C:\Users\yongs\.m2\repository\io\micrometer\micrometer-core\1.5.1\micrometer-core-1.5.1.jar;C:\Users\yongs\.m2\repository\org\hdrhistogram\HdrHistogram\2.1.12\HdrHistogram-2.1.12.jar;C:\Users\yongs\.m2\repository\org\latencyutils\LatencyUtils\2.0.3\LatencyUtils-2.0.3.jar;C:\Users\yongs\.m2\repository\javax\batch\javax.batch-api\1.0\javax.batch-api-1.0.jar;C:\Users\yongs\.m2\repository\org\codehaus\jettison\jettison\1.2\jettison-1.2.jar;C:\Users\yongs\.m2\repository\org\springframework\batch\spring-batch-infrastructure\4.2.2.RELEASE\spring-batch-infrastructure-4.2.2.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\retry\spring-retry\1.2.5.RELEASE\spring-retry-1.2.5.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-aop\5.2.6.RELEASE\spring-aop-5.2.6.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-beans\5.2.6.RELEASE\spring-beans-5.2.6.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-context\5.2.6.RELEASE\spring-context-5.2.6.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-tx\5.2.6.RELEASE\spring-tx-5.2.6.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot-starter-web\2.3.0.RELEASE\spring-boot-starter-web-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot-starter-json\2.3.0.RELEASE\spring-boot-starter-json-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.11.0\jackson-datatype-jdk8-2.11.0.jar;C:\Users\yongs\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.11.0\jackson-datatype-jsr310-2.11.0.jar;C:\Users\yongs\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.11.0\jackson-module-parameter-names-2.11.0.jar;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\2.3.0.RELEASE\spring-boot-starter-tomcat-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\9.0.35\tomcat-embed-core-9.0.35.jar;C:\Users\yongs\.m2\repository\org\glassfish\jakarta.el\3.0.3\jakarta.el-3.0.3.jar;C:\Users\yongs\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\9.0.35\tomcat-embed-websocket-9.0.35.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-web\5.2.6.RELEASE\spring-web-5.2.6.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-webmvc\5.2.6.RELEASE\spring-webmvc-5.2.6.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-expression\5.2.6.RELEASE\spring-expression-5.2.6.RELEASE.jar;C:\Users\yongs\.m2\repository\org\apache\httpcomponents\httpclient\4.5.12\httpclient-4.5.12.jar;C:\Users\yongs\.m2\repository\org\apache\httpcomponents\httpcore\4.4.13\httpcore-4.4.13.jar;C:\Users\yongs\.m2\repository\commons-codec\commons-codec\1.14\commons-codec-1.14.jar;C:\Users\yongs\.m2\repository\org\springframework\boot\spring-boot-starter-data-jdbc\2.3.0.RELEASE\spring-boot-starter-data-jdbc-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\data\spring-data-jdbc\2.0.0.RELEASE\spring-data-jdbc-2.0.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\data\spring-data-relational\2.0.0.RELEASE\spring-data-relational-2.0.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\data\spring-data-commons\2.3.0.RELEASE\spring-data-commons-2.3.0.RELEASE.jar;C:\Users\yongs\.m2\repository\org\slf4j\slf4j-api\1.7.30\slf4j-api-1.7.30.jar;C:\Users\yongs\.m2\repository\com\h2database\h2\1.4.200\h2-1.4.200.jar;C:\Users\yongs\.m2\repository\mysql\mysql-connector-java\8.0.20\mysql-connector-java-8.0.20.jar;C:\Users\yongs\.m2\repository\org\projectlombok\lombok\1.18.12\lombok-1.18.12.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-core\5.2.6.RELEASE\spring-core-5.2.6.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-jcl\5.2.6.RELEASE\spring-jcl-5.2.6.RELEASE.jar;C:\Users\yongs\.m2\repository\org\springframework\spring-jdbc\5.2.6.RELEASE\spring-jdbc-5.2.6.RELEASE.jar com.springbatch.exercise.SpringBatchExerciseApplication --job.name=tsvFileProcessJob inputFile=C:\Users\yongs\OneDrive\Desktop\personal_projects\java\spring-batch-exercise\sample-data.tsv
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.3.0.RELEASE)
+
+2020-06-13 07:38:30.812  INFO 12444 --- [           main] c.s.e.SpringBatchExerciseApplication     : Starting SpringBatchExerciseApplication on LAPTOP-ISSV75N4 with PID 12444 (C:\Users\yongs\OneDrive\Desktop\personal_projects\java\spring-batch-exercise\target\classes started by yongs in C:\Users\yongs\OneDrive\Desktop\personal_projects\java\spring-batch-exercise)
+2020-06-13 07:38:30.814  INFO 12444 --- [           main] c.s.e.SpringBatchExerciseApplication     : The following profiles are active: mysql
+2020-06-13 07:38:31.412  INFO 12444 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2020-06-13 07:38:31.432  INFO 12444 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 16ms. Found 0 JDBC repository interfaces.
+2020-06-13 07:38:31.904  INFO 12444 --- [           main] c.s.e.job.JobParamAndScopeConfiguration  : >>> step3
+2020-06-13 07:38:31.937  INFO 12444 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService
+2020-06-13 07:38:31.938  INFO 12444 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'taskExecutor'
+2020-06-13 07:38:31.981  INFO 12444 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-06-13 07:38:32.080  INFO 12444 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-06-13 07:38:32.122  INFO 12444 --- [           main] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: MYSQL
+2020-06-13 07:38:32.132  INFO 12444 --- [           main] o.s.b.c.l.support.SimpleJobLauncher      : No TaskExecutor has been set, defaulting to synchronous executor.
+2020-06-13 07:38:32.248  INFO 12444 --- [           main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2020-06-13 07:38:32.267  INFO 12444 --- [           main] c.s.e.SpringBatchExerciseApplication     : Started SpringBatchExerciseApplication in 1.891 seconds (JVM running for 3.397)
+2020-06-13 07:38:32.268  INFO 12444 --- [           main] o.s.b.a.b.JobLauncherApplicationRunner   : Running default command line with: [inputFile=C:\Users\yongs\OneDrive\Desktop\personal_projects\java\spring-batch-exercise\sample-data.tsv]
+2020-06-13 07:38:32.366  INFO 12444 --- [           main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=tsvFileProcessJob]] launched with the following parameters: [{inputFile=C:\Users\yongs\OneDrive\Desktop\personal_projects\java\spring-batch-exercise\sample-data.tsv, run.id=39, version=6}]
+2020-06-13 07:38:32.409  INFO 12444 --- [           main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [partitionStep]
+2020-06-13 07:38:32.529  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:32.529  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:32.529  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:32.529  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:32.529  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:32.529  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:32.529  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:38:32.529  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:38:32.529  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+200 OK
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+161
+SSItem(shopId=22222, itemId=222222)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+taskExecutor-2
+162
+taskExecutor-3
+2020-06-13 07:38:34.066  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:34.066  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:34.066  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:34.066  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:34.066  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:34.066  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:34.066  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:38:34.066  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:38:34.066  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+162
+taskExecutor-3
+2020-06-13 07:38:35.010  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:35.010  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:35.011  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=22222, itemId=222222)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+200 OK
+2020-06-13 07:38:35.012  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:35.012  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:38:35.012  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:38:35.012  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:35.012  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:35.012  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+162
+taskExecutor-3
+2020-06-13 07:38:36.010  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:36.011  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:36.011  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=22222, itemId=222222)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:38:36.012  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:36.012  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:36.012  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:38:36.014  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:36.014  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:36.014  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+162
+taskExecutor-3
+2020-06-13 07:38:37.009  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:37.009  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:37.009  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=22222, itemId=222222)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:38:37.011  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:37.011  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:37.011  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:38:37.012  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:37.012  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:37.012  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+162
+taskExecutor-3
+2020-06-13 07:38:38.008  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:38.008  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:38.008  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=22222, itemId=222222)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:38:38.010  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:38.010  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:38.010  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:38:38.011  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:38.012  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:38.012  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+162
+taskExecutor-3
+SSItem(shopId=22222, itemId=222222)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:38:39.009  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:39.009  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:39.009  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:38:39.009  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:39.009  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:39.009  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:38:39.012  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:39.012  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:39.012  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=11111, itemId=111111)
+200 OK
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+162
+taskExecutor-3
+SSItem(shopId=22222, itemId=222222)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:38:40.008  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:40.008  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:40.008  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:40.008  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:40.008  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:38:40.008  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:38:40.011  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:40.011  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:40.011  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=22222, itemId=222222)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+162
+taskExecutor-3
+2020-06-13 07:38:41.008  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:41.008  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:41.008  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:41.008  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:41.008  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:38:41.008  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:38:41.010  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:41.010  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:41.010  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=22222, itemId=222222)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:38:42.009  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:42.009  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:42.009  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+162
+taskExecutor-3
+2020-06-13 07:38:42.010  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:42.010  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:42.010  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:38:43.007  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:43.007  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:43.007  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+200 OK
+SSItem(shopId=22222, itemId=222222)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+162
+taskExecutor-3
+2020-06-13 07:38:44.020  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:44.020  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:44.020  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:44.020  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:44.020  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:38:44.020  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:38:45.018  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:45.018  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:45.018  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+162
+taskExecutor-3
+200 OK
+SSItem(shopId=22222, itemId=222222)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:38:46.007  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:46.007  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:46.007  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:38:46.007  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:46.007  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:46.007  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:38:47.008  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:47.008  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:47.008  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=22222, itemId=222222)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+200 OK
+2020-06-13 07:38:48.007  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:48.007  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+162
+taskExecutor-3
+2020-06-13 07:38:48.008  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:38:48.008  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:48.008  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:48.008  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:38:49.008  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:49.008  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:49.008  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=22222, itemId=222222)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+162
+taskExecutor-3
+2020-06-13 07:38:50.006  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:50.007  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:50.007  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+2020-06-13 07:38:50.007  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:50.007  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:50.007  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:38:51.008  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:51.008  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:51.008  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=22222, itemId=222222)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:38:51.012  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:51.012  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:51.012  INFO 12444 --- [ taskExecutor-1] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+162
+taskExecutor-3
+2020-06-13 07:38:52.007  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:52.007  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:52.007  INFO 12444 --- [ taskExecutor-3] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:38:52.011  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : URI: http://localhost:3000/item
+2020-06-13 07:38:52.011  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Method: GET
+2020-06-13 07:38:52.011  INFO 12444 --- [ taskExecutor-2] s.e.h.CustomClientHttpRequestInterceptor : HTTP Headers: [Accept:"text/plain, application/json, application/*+json, */*", Content-Length:"0"]
+200 OK
+SSItem(shopId=22222, itemId=222222)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+160
+taskExecutor-1
+2020-06-13 07:38:52.028  INFO 12444 --- [ taskExecutor-1] o.s.batch.core.step.AbstractStep         : Step: [tsvFileProcessStep:partition1] executed in 19s567ms
+200 OK
+SSItem(shopId=11111, itemId=111111)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+162
+taskExecutor-3
+200 OK
+SSItem(shopId=33333, itemId=333333)
+SSItemResponseModel(shopId=11111, itemId=123456, itemMng=mng1, stock=true)
+161
+taskExecutor-2
+2020-06-13 07:38:53.021  INFO 12444 --- [ taskExecutor-2] o.s.batch.core.step.AbstractStep         : Step: [tsvFileProcessStep:partition2] executed in 20s560ms
+2020-06-13 07:38:53.022  INFO 12444 --- [ taskExecutor-3] o.s.batch.core.step.AbstractStep         : Step: [tsvFileProcessStep:partition0] executed in 20s560ms
+2020-06-13 07:38:53.030  INFO 12444 --- [           main] o.s.batch.core.step.AbstractStep         : Step: [partitionStep] executed in 20s620ms
+2020-06-13 07:38:53.046  INFO 12444 --- [           main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=tsvFileProcessJob]] completed with the following parameters: [{inputFile=C:\Users\yongs\OneDrive\Desktop\personal_projects\java\spring-batch-exercise\sample-data.tsv, run.id=39, version=6}] and the following status: [COMPLETED] in 20s663ms
