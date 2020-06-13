@@ -3,7 +3,10 @@ package com.springbatch.exercise.job;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springbatch.exercise.domain.SSItem;
 import com.springbatch.exercise.domain.SSItemResponseModel;
+import com.springbatch.exercise.listener.JobCompletionNotificationListener;
+import com.springbatch.exercise.listener.StepExecListener;
 import com.springbatch.exercise.partitioner.CustomMultiResourcePartitioner;
+import com.springbatch.exercise.policy.TsvFileReaderSkipper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -16,6 +19,7 @@ import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
+import org.springframework.batch.item.file.FlatFileParseException;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
@@ -51,6 +55,10 @@ public class TsvFileProcessConfiguration {
     private final ObjectMapper objectMapper;
     private final RestTemplate restTemplate;
     private final ResourcePatternResolver resourcePatternResolver;
+    private final StepExecListener stepExecListener;
+    private final TsvFileReaderSkipper tsvFileReaderSkipper;
+    private final JobCompletionNotificationListener jobCompletionListener;
+
 
 //    This is also working.
 //    @Bean
@@ -103,6 +111,7 @@ public class TsvFileProcessConfiguration {
                 .incrementer(new RunIdIncrementer())
                 //.start(tsvFileProcessStep())
                 .start(partitionStep())
+                .listener(jobCompletionListener)
                 .build();
 
     }
@@ -141,6 +150,7 @@ public class TsvFileProcessConfiguration {
                 .gridSize(4)
                 .step(tsvFileProcessStep())
                 .taskExecutor(taskExecutor())
+                .listener(stepExecListener)
                 .build();
     }
 
@@ -151,6 +161,7 @@ public class TsvFileProcessConfiguration {
                 .reader(tsvReader(null))
                 .processor(tsvProcessor())
                 .writer(tsvWriter())
+                .faultTolerant().skipPolicy(tsvFileReaderSkipper)
                 .build();
     }
 
@@ -212,7 +223,15 @@ public class TsvFileProcessConfiguration {
     }
 
     public ItemProcessor<? super SSItem,? extends SSItem> tsvProcessor() {
-        return item -> new SSItem(item.getShopId(), item.getItemId());
+        //return item -> new SSItem(item.getShopId(), item.getItemId());
+        return item -> {
+            if(item.getShopId() == 99999){
+                //throw new RuntimeException("!!!!!!!!!!!!!!!!!!");
+                log.error(">>>>>>> 99999 is illegal shop. I will skip this.");
+                return null;
+            }
+            return item;
+        };
     }
 
 
