@@ -5,6 +5,7 @@ import org.springframework.batch.item.ExecutionContext;
 import org.springframework.core.io.Resource;
 import org.springframework.util.Assert;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ public class CustomMultiResourcePartitioner implements Partitioner {
     private String keyName = DEFAULT_KEY_NAME;
     private Resource[] resources = new Resource[0];
 
+    private Resource resource;
 
 
     /**
@@ -39,16 +41,45 @@ public class CustomMultiResourcePartitioner implements Partitioner {
     public Map<String, ExecutionContext> partition(int gridSize) {
 
         Map<String, ExecutionContext> map = new HashMap<>(gridSize);
+        System.out.println("***********");
+        System.out.println(resource);
+        String absPath=null;
 
-        int i=0, k=1;
-        for (Resource resource: resources) {
-            ExecutionContext context = new ExecutionContext();
-            Assert.state(resource.exists(), "Resource does not exist:" + resource);
-            context.putString(keyName, resource.getFilename());
-            context.putString("opFileName", "output" + (k++) +".xml");
-            map.put(PARTITION_KEY+i, context);
-            i++;
+
+
+        try {
+            absPath =resource.getFile().getAbsolutePath();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+
+        System.out.println("***********");
+        ExecutionContext context = new ExecutionContext();
+        Assert.state(resource.exists(), "Resource does not exist:" + resource);
+        context.putString(keyName, absPath);
+        context.putString("opFileName", "output1.xml");
+        map.put(PARTITION_KEY+1, context);
+
+
+//        int i=0, k=1;
+//        for (Resource resource: resources) {
+//            ExecutionContext context = new ExecutionContext();
+//            Assert.state(resource.exists(), "Resource does not exist:" + resource);
+//            context.putString(keyName, resource.getFilename());
+//            context.putString("opFileName", "output" + (k++) +".xml");
+//            map.put(PARTITION_KEY+i, context);
+//            i++;
+//        }
         return map;
+    }
+
+
+    public Resource getResource() {
+        return resource;
+    }
+
+    public void setResource(Resource resource) {
+        this.resource = resource;
     }
 }

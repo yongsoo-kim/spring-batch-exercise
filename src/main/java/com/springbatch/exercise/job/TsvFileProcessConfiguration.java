@@ -9,6 +9,7 @@ import com.springbatch.exercise.partitioner.CustomMultiResourcePartitioner;
 import com.springbatch.exercise.policy.TsvFileReaderSkipper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -31,6 +32,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
@@ -60,42 +62,6 @@ public class TsvFileProcessConfiguration {
     private final JobCompletionNotificationListener jobCompletionListener;
 
 
-//    This is also working.
-//    @Bean
-//    public RestTemplate restTemplate() {
-//        return new RestTemplate();
-//    }
-
-    // You can do more setting with this style.
-//    @Bean
-//    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-//
-//
-//        // Do any additional configuration here
-//        return builder.build();
-//    }
-
-
-//    @Bean
-//    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-//
-//
-//        // Do any additional configuration here
-//        return builder.build();
-//    }
-
-
-
-//
-//    @Autowired
-//    private RestTemplate restTemplate;
-
-
-
-
-
-
-
     private final static String GET_BASE_URL="http://localhost:3000/item";
 
     private final static int CHUNK_SIZE=10;
@@ -116,42 +82,40 @@ public class TsvFileProcessConfiguration {
 
     }
 
-
-    @Bean
-    public CustomMultiResourcePartitioner partitioner() {
-        CustomMultiResourcePartitioner partitioner = new CustomMultiResourcePartitioner();
-        Resource[] resources;
-        try {
-            resources = resourcePatternResolver.getResources("file:src/main/resources/input/*.tsv");
-        } catch (IOException e ){
-            throw new RuntimeException("I/O problems when resolving the input file pattern.", e);
-        }
-        partitioner.setResources(resources);
-        return partitioner;
-    }
-
-
-
-//
-//    @Bean
-//    public Step destroyPool() {
-//        return stepBuilderFactory.get("destroypool")
-//                .partitioner("tsvFileProcessStep", partitioner())
-//                .step(tsvFileProcessStep())
-//                .taskExecutor(taskExecutor())
-//                .build();
-//    }
-
     @Bean
     @JobScope // Bean will be newly created every time Job runs.
     public Step partitionStep() {
         return stepBuilderFactory.get("partitionStep")
-                .partitioner("tsvFileProcessStep", partitioner())
+                .partitioner("tsvFileProcessStep", partitioner(null))
                 .gridSize(4)
                 .step(tsvFileProcessStep())
                 .taskExecutor(taskExecutor())
                 .listener(stepExecListener)
                 .build();
+    }
+
+    @Bean
+    @JobScope
+    public CustomMultiResourcePartitioner partitioner(@Value("#{jobParameters[inputFile]}") String inputFile) {
+        System.out.println("-------------------------------");
+        System.out.println(inputFile);
+        System.out.println("-------------------------------");
+        CustomMultiResourcePartitioner partitioner = new CustomMultiResourcePartitioner();
+
+        Resource resource;
+        resource = new FileSystemResource(inputFile);
+
+//        //Resource[] resources;
+//        Resource resource;
+//        try {
+//            //resources = resourcePatternResolver.getResources("file:src/main/resources/input/*part*.tsv");
+//
+//        } catch (){
+//            throw new RuntimeException("I/O problems when resolving the input file pattern.", e);
+//        }
+//        partitioner.setResources(resource);
+        partitioner.setResource(resource);
+        return partitioner;
     }
 
     @Bean
@@ -165,15 +129,7 @@ public class TsvFileProcessConfiguration {
                 .build();
     }
 
-//    @Bean
-//    public TaskExecutor taskExecutor() {
-//        ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
-//        taskExecutor.setMaxPoolSize(5);
-//        taskExecutor.setCorePoolSize(5);
-//        taskExecutor.setQueueCapacity(5);
-//        taskExecutor.afterPropertiesSet();
-//        return taskExecutor;
-//    }
+
 
     @Bean
     public TaskExecutor taskExecutor() {
@@ -186,11 +142,14 @@ public class TsvFileProcessConfiguration {
     @StepScope
     //public FlatFileItemReader<SSItem> tsvReader(@Value("#{jobParameters[inputFile]}") String inputFilePath) {
     public FlatFileItemReader<SSItem> tsvReader(@Value("#{stepExecutionContext[fileName]}") String filename)  {
-
+        System.out.println("===========================");
+        System.out.println(filename);
+        System.out.println("===========================");
+        MDC.put("IAM", Thread.currentThread().getName());
         return new FlatFileItemReaderBuilder<SSItem>()
                 .name("tsvReader")
-                .resource(new ClassPathResource("input/" + filename))
-                //.resource(new FileSystemResource(inputFilePath))
+                //.resource(new ClassPathResource("input/" + filename))
+                .resource(new FileSystemResource(filename))
                 .lineTokenizer(new DelimitedLineTokenizer(DelimitedLineTokenizer.DELIMITER_TAB) {{
                     setNames(new String[]{"shopId", "itemId"});
                 }})
@@ -217,6 +176,8 @@ public class TsvFileProcessConfiguration {
                     Thread currentThread = Thread.currentThread();
                     System.out.println(currentThread.getId());
                     System.out.println(currentThread.getName());
+                    System.out.println("========MDC==========");
+                    System.out.println(MDC.get("IAM"));
                 }
             }
         };
@@ -245,5 +206,27 @@ public class TsvFileProcessConfiguration {
             return ssItem;
         }
     }
+
+
+
+//    @Bean
+//    public TaskExecutor taskExecutor() {
+//        ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
+//        taskExecutor.setMaxPoolSize(5);
+//        taskExecutor.setCorePoolSize(5);
+//        taskExecutor.setQueueCapacity(5);
+//        taskExecutor.afterPropertiesSet();
+//        return taskExecutor;
+//    }
+
+    //
+//    @Bean
+//    public Step destroyPool() {
+//        return stepBuilderFactory.get("destroypool")
+//                .partitioner("tsvFileProcessStep", partitioner())
+//                .step(tsvFileProcessStep())
+//                .taskExecutor(taskExecutor())
+//                .build();
+//    }
 
 }
