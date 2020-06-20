@@ -25,6 +25,7 @@ import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.batch.item.file.transform.FieldSet;
+import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -44,7 +45,10 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.validation.BindException;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 @Slf4j
@@ -87,7 +91,9 @@ public class TsvFileProcessConfiguration {
     public Step partitionStep() {
         return stepBuilderFactory.get("partitionStep")
                 .partitioner("tsvFileProcessStep", partitioner(null))
+//                .partitioner("step99", partitioner(null))
                 .gridSize(4)
+//                .step(step99(null))
                 .step(tsvFileProcessStep())
                 .taskExecutor(taskExecutor())
                 .listener(stepExecListener)
@@ -118,13 +124,29 @@ public class TsvFileProcessConfiguration {
         return partitioner;
     }
 
+//
+//    @Bean
+//    @JobScope
+//    public Step step99(@Value("#{stepExecutionContext[fileName]}") String filename) {
+//        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//        log.info(filename);
+//        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//        return stepBuilderFactory.get("step99")
+//                .tasklet((stepContribution, chunkContext) -> {
+//                    log.info(">>> This is Step1");
+//                    return RepeatStatus.FINISHED;
+//                })
+//                .build();
+//    }
+
+
     @Bean
     public Step tsvFileProcessStep() {
         return stepBuilderFactory.get("tsvFileProcessStep")
                 .<SSItem, SSItem>chunk(CHUNK_SIZE)
                 .reader(tsvReader(null))
                 .processor(tsvProcessor())
-                .writer(tsvWriter())
+                .writer(tsvWriter(null))
                 .faultTolerant().skipPolicy(tsvFileReaderSkipper)
                 .build();
     }
@@ -142,6 +164,8 @@ public class TsvFileProcessConfiguration {
     @StepScope
     //public FlatFileItemReader<SSItem> tsvReader(@Value("#{jobParameters[inputFile]}") String inputFilePath) {
     public FlatFileItemReader<SSItem> tsvReader(@Value("#{stepExecutionContext[fileName]}") String filename)  {
+        log.info(System.getProperty("os.name").toLowerCase());
+
         System.out.println("===========================");
         System.out.println(filename);
         System.out.println("===========================");
@@ -151,33 +175,55 @@ public class TsvFileProcessConfiguration {
                 //.resource(new ClassPathResource("input/" + filename))
                 .resource(new FileSystemResource(filename))
                 .lineTokenizer(new DelimitedLineTokenizer(DelimitedLineTokenizer.DELIMITER_TAB) {{
-                    setNames(new String[]{"shopId", "itemId"});
+                    setNames(new String[]{"shopId", "mngNumber"});
                 }})
                 .fieldSetMapper(new SSItemSetMapper())
                 .build();
     }
 
 
-    public ItemWriter<? super SSItem> tsvWriter() {
+    @Bean
+    @StepScope
+    public ItemWriter<? super SSItem> tsvWriter(@Value("#{stepExecutionContext[doneFile]}") String doneFile) {
+
+        StringBuffer sbf = new StringBuffer();
+        File file = new File(doneFile);
+//        StringBuilder sbf = new StringBuilder();
+
         return new ItemWriter<SSItem>() {
             @Override
             public void write(List<? extends SSItem> items) throws Exception {
                 for(SSItem item: items) {
 
+//                    log.info("((((((((("+doneFile+")))))))))))))");
+//                    HttpHeaders headers = new HttpHeaders();
+//                    headers.setContentType(MediaType.APPLICATION_JSON);
+//                    ResponseEntity<String> response = restTemplate.getForEntity(GET_BASE_URL,String.class);
+//                    System.out.println(response.getStatusCode());
+//                    String json = response.getBody();
+//                    SSItemResponseModel ttt = objectMapper.readValue(json, SSItemResponseModel.class);
+//                    System.out.println(item);
+//                    System.out.println(ttt);
+//                    Thread currentThread = Thread.currentThread();
+//                    System.out.println(currentThread.getId());
+//                    System.out.println(currentThread.getName());
+//                    System.out.println("========MDC==========");
+//                    System.out.println(MDC.get("IAM"));
 
-                    HttpHeaders headers = new HttpHeaders();
-                    headers.setContentType(MediaType.APPLICATION_JSON);
-                    ResponseEntity<String> response = restTemplate.getForEntity(GET_BASE_URL,String.class);
-                    System.out.println(response.getStatusCode());
-                    String json = response.getBody();
-                    SSItemResponseModel ttt = objectMapper.readValue(json, SSItemResponseModel.class);
-                    System.out.println(item);
-                    System.out.println(ttt);
-                    Thread currentThread = Thread.currentThread();
-                    System.out.println(currentThread.getId());
-                    System.out.println(currentThread.getName());
-                    System.out.println("========MDC==========");
-                    System.out.println(MDC.get("IAM"));
+
+
+                    String contents =sbf.append(item.getShopId())
+                            .append("\t")
+                            .append(item.getMngNumber()).toString();
+
+                    writeLineToFile(doneFile, contents);
+
+
+
+
+
+                    sbf.setLength(0);
+
                 }
             }
         };
@@ -202,10 +248,32 @@ public class TsvFileProcessConfiguration {
         public SSItem mapFieldSet(FieldSet fieldSet) throws BindException {
             SSItem ssItem = new SSItem();
             ssItem.setShopId(fieldSet.readInt("shopId"));
-            ssItem.setItemId(fieldSet.readLong("itemId"));
+            ssItem.setMngNumber(fieldSet.readString("mngNumber"));
             return ssItem;
         }
     }
+
+
+    private void writeLineToFile(String filePath, String line) throws IOException {
+
+        //Default buffer is 8192 byte
+
+        BufferedWriter writer = new BufferedWriter
+                (new OutputStreamWriter(new FileOutputStream(filePath, true), StandardCharsets.UTF_8));
+
+//        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
+        writer.write(line);
+        writer.newLine();
+        writer.flush();
+        writer.close();
+    }
+
+
+//
+//                    java.nio.file.Files.write(Paths.get(file.toURI()),
+//                            contents.getBytes("utf-8"),
+//    StandardOpenOption.CREATE,
+//    StandardOpenOption.APPEND);
 
 
 

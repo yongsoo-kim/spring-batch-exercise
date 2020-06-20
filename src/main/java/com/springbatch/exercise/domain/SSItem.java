@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 public class SSItem {
 
     private int shopId;
-    private long itemId;
+    private String mngNumber;
 
-    public SSItem(int shopId, long itemId) {
+    public SSItem(int shopId, String mngNumber) {
         this.shopId = shopId;
-        this.itemId = itemId;
+        this.mngNumber = mngNumber;
     }
 }

@@ -1,5 +1,7 @@
 package com.springbatch.exercise.partitioner;
 
+import com.springbatch.exercise.utils.FileSplitter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.partition.support.Partitioner;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.core.io.Resource;
@@ -9,11 +11,18 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 public class CustomMultiResourcePartitioner implements Partitioner {
 
     private static final String DEFAULT_KEY_NAME = "fileName";
     private static final String PARTITION_KEY = "partition";
     private String keyName = DEFAULT_KEY_NAME;
+
+
+
+    private static final String DONE_FILE_KEY_NAME = "doneFile";
+    private static final String SKIPPED_FILE_KEY_NAME = "skippedFile";
+
     private Resource[] resources = new Resource[0];
 
     private Resource resource;
@@ -45,23 +54,33 @@ public class CustomMultiResourcePartitioner implements Partitioner {
         System.out.println(resource);
         String absPath=null;
 
-
-
         try {
             absPath =resource.getFile().getAbsolutePath();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        log.info("SPLIT---> START!!!!");
+        FileSplitter fileSplitter = new FileSplitter();
+        try {
+            fileSplitter.splitFile(absPath, gridSize);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        log.info("SPLIT---> END!!!!");
 
-        System.out.println("***********");
-        ExecutionContext context = new ExecutionContext();
-        Assert.state(resource.exists(), "Resource does not exist:" + resource);
-        context.putString(keyName, absPath);
-        context.putString("opFileName", "output1.xml");
-        map.put(PARTITION_KEY+1, context);
 
-
+        for (int i=0; i<gridSize; i++) {
+            log.info("##################");
+            System.out.println("***********");
+            ExecutionContext context = new ExecutionContext();
+            Assert.state(resource.exists(), "Resource does not exist:" + resource);
+            context.putString(keyName, absPath);
+            context.putString(DONE_FILE_KEY_NAME, absPath+"_DONE_"+i);
+            context.putString(SKIPPED_FILE_KEY_NAME, absPath+"_SKIPPED_"+i);
+            map.put(PARTITION_KEY + i, context);
+            log.info(map.toString());
+        }
 //        int i=0, k=1;
 //        for (Resource resource: resources) {
 //            ExecutionContext context = new ExecutionContext();
