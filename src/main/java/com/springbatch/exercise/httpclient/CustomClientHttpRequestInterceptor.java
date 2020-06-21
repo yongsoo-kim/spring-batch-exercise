@@ -15,9 +15,9 @@ public class CustomClientHttpRequestInterceptor implements ClientHttpRequestInte
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] bytes, ClientHttpRequestExecution execution) throws IOException {
         // log the http request
-        LOG.info("URI: {}", request.getURI());
-        LOG.info("HTTP Method: {}", request.getMethodValue());
-        LOG.info("HTTP Headers: {}", request.getHeaders());
+//        LOG.info("URI: {}", request.getURI());
+//        LOG.info("HTTP Method: {}", request.getMethodValue());
+//        LOG.info("HTTP Headers: {}", request.getHeaders());
         return execution.execute(request, bytes);
     }
 

@@ -9,6 +9,6 @@ public class SSItemResponseModel {
 
     private int shopId;
     private long itemId;
-    private String itemMng;
+    private String mngNumber;
     private boolean stock;
 }

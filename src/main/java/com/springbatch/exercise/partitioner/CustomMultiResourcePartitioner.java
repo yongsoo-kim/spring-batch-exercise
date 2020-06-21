@@ -60,10 +60,12 @@ public class CustomMultiResourcePartitioner implements Partitioner {
             e.printStackTrace();
         }
 
+
+        String[] splitFileNames=null;
         log.info("SPLIT---> START!!!!");
         FileSplitter fileSplitter = new FileSplitter();
         try {
-            fileSplitter.splitFile(absPath, gridSize);
+            splitFileNames = fileSplitter.splitFile(absPath, gridSize);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -78,6 +80,7 @@ public class CustomMultiResourcePartitioner implements Partitioner {
             context.putString(keyName, absPath);
             context.putString(DONE_FILE_KEY_NAME, absPath+"_DONE_"+i);
             context.putString(SKIPPED_FILE_KEY_NAME, absPath+"_SKIPPED_"+i);
+            context.putString("splitFile", splitFileNames[i]);
             map.put(PARTITION_KEY + i, context);
             log.info(map.toString());
         }

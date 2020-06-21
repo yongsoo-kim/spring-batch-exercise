@@ -163,17 +163,17 @@ public class TsvFileProcessConfiguration {
     @Bean
     @StepScope
     //public FlatFileItemReader<SSItem> tsvReader(@Value("#{jobParameters[inputFile]}") String inputFilePath) {
-    public FlatFileItemReader<SSItem> tsvReader(@Value("#{stepExecutionContext[fileName]}") String filename)  {
+    public FlatFileItemReader<SSItem> tsvReader(@Value("#{stepExecutionContext[splitFile]}") String splitFile)  {
         log.info(System.getProperty("os.name").toLowerCase());
 
         System.out.println("===========================");
-        System.out.println(filename);
+        System.out.println(splitFile);
         System.out.println("===========================");
         MDC.put("IAM", Thread.currentThread().getName());
         return new FlatFileItemReaderBuilder<SSItem>()
                 .name("tsvReader")
                 //.resource(new ClassPathResource("input/" + filename))
-                .resource(new FileSystemResource(filename))
+                .resource(new FileSystemResource(splitFile))
                 .lineTokenizer(new DelimitedLineTokenizer(DelimitedLineTokenizer.DELIMITER_TAB) {{
                     setNames(new String[]{"shopId", "mngNumber"});
                 }})
@@ -187,23 +187,47 @@ public class TsvFileProcessConfiguration {
     public ItemWriter<? super SSItem> tsvWriter(@Value("#{stepExecutionContext[doneFile]}") String doneFile) {
 
         StringBuffer sbf = new StringBuffer();
-        File file = new File(doneFile);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        //TODO: FLUSH & CLOSE ISSUE
+        BufferedWriter writer = null;
+        try {
+            writer = getWriter(doneFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        BufferedWriter writer2 = writer;
+
 //        StringBuilder sbf = new StringBuilder();
 
         return new ItemWriter<SSItem>() {
             @Override
             public void write(List<? extends SSItem> items) throws Exception {
+
+                SSItemResponseModel resItem = null;
+                //ResponseEntity<String> response = null;
+                String response = null;
+                String json = null;
                 for(SSItem item: items) {
 
-//                    log.info("((((((((("+doneFile+")))))))))))))");
-//                    HttpHeaders headers = new HttpHeaders();
-//                    headers.setContentType(MediaType.APPLICATION_JSON);
+                    //log.info("((((((((("+doneFile+")))))))))))))");
+
+
+                   // System.out.println(response.getStatusCode());
 //                    ResponseEntity<String> response = restTemplate.getForEntity(GET_BASE_URL,String.class);
-//                    System.out.println(response.getStatusCode());
 //                    String json = response.getBody();
-//                    SSItemResponseModel ttt = objectMapper.readValue(json, SSItemResponseModel.class);
+//                    SSItemResponseModel resItem = objectMapper.readValue(json, SSItemResponseModel.class);
+//
+                    ///PERFORMANCE???
+                    //response = restTemplate.getForObject(GET_BASE_URL,String.class);
+//                    json = response.getBody();
+                    //resItem = objectMapper.readValue(json, SSItemResponseModel.class);
+
+
+                    //SSItemResponseModel resItem = objectMapper.readValue(json, SSItemResponseModel.class);
 //                    System.out.println(item);
-//                    System.out.println(ttt);
 //                    Thread currentThread = Thread.currentThread();
 //                    System.out.println(currentThread.getId());
 //                    System.out.println(currentThread.getName());
@@ -212,11 +236,15 @@ public class TsvFileProcessConfiguration {
 
 
 
-                    String contents =sbf.append(item.getShopId())
-                            .append("\t")
-                            .append(item.getMngNumber()).toString();
+//                    String contents =sbf.append(resItem.getShopId())
+//                            .append("\t")
+//                            .append(resItem.getMngNumber()).toString();
 
-                    writeLineToFile(doneFile, contents);
+                    String contents =sbf.append("1111")
+                            .append("\t")
+                            .append("2222").toString();
+
+                    writeLineToFile(writer2, contents);
 
 
 
@@ -254,18 +282,29 @@ public class TsvFileProcessConfiguration {
     }
 
 
-    private void writeLineToFile(String filePath, String line) throws IOException {
+    private void writeLineToFile(BufferedWriter writer, String line) throws IOException {
 
         //Default buffer is 8192 byte
 
-        BufferedWriter writer = new BufferedWriter
-                (new OutputStreamWriter(new FileOutputStream(filePath, true), StandardCharsets.UTF_8));
+//        BufferedWriter writer = new BufferedWriter
+//                (new OutputStreamWriter(new FileOutputStream(filePath, true), StandardCharsets.UTF_8));
 
 //        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
         writer.write(line);
         writer.newLine();
-        writer.flush();
-        writer.close();
+        //writer.flush();
+        //writer.close();
+    }
+
+
+
+    private BufferedWriter getWriter(String filePath) throws IOException {
+
+        //Default buffer is 8192 byte
+
+        return new BufferedWriter
+                (new OutputStreamWriter(new FileOutputStream(filePath, true), StandardCharsets.UTF_8));
+
     }
 
 

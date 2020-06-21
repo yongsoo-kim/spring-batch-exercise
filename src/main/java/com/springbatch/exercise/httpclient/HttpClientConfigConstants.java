@@ -3,8 +3,8 @@ package com.springbatch.exercise.httpclient;
 public interface HttpClientConfigConstants {
 
     // Connection pool
-    int MAX_ROUTE_CONNECTIONS     = 40;
-    int MAX_TOTAL_CONNECTIONS     = 40;
+    int MAX_ROUTE_CONNECTIONS     = 50000;
+    int MAX_TOTAL_CONNECTIONS     = 10000;
     int MAX_LOCALHOST_CONNECTIONS = 80;
 
     // Keep alive

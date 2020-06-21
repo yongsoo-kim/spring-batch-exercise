@@ -9,7 +9,10 @@ import java.nio.file.Paths;
 public class FileSplitter {
 
 
-    public void splitFile(final String filePath, final int splitCount) throws IOException {
+    public String[] splitFile(final String filePath, final int splitCount) throws IOException {
+
+        String[] splitFileNames = new String[splitCount];
+
         if(splitCount<1) {
             throw new IllegalArgumentException("splitCount must be at least 1. splitCount = "+splitCount);
         }
@@ -25,7 +28,8 @@ public class FileSplitter {
             String str;
             for (int i = 0; i<splitCount;i++){
                 //change file name after split.
-                try(BufferedWriter bufferedWriter = Files.newBufferedWriter(Paths.get(filePath+"_"+i))){
+                String splitFileName=filePath+"_"+i;
+                try(BufferedWriter bufferedWriter = Files.newBufferedWriter(Paths.get(splitFileName))){
                     for (int j = 0 ; j< splitFileLinesCount; j++){
                         if((str=bufferedReader.readLine()) !=null) {
                             bufferedWriter.write(str);
@@ -37,9 +41,10 @@ public class FileSplitter {
 
 
                 }
+                splitFileNames[i] = splitFileName;
             }
 
-
+            return splitFileNames;
 
 
         }
