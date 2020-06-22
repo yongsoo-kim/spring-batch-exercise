@@ -7,6 +7,7 @@ import com.springbatch.exercise.listener.JobCompletionNotificationListener;
 import com.springbatch.exercise.listener.StepExecListener;
 import com.springbatch.exercise.partitioner.CustomMultiResourcePartitioner;
 import com.springbatch.exercise.policy.TsvFileReaderSkipper;
+import com.springbatch.exercise.utils.BatchFileManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
@@ -20,35 +21,23 @@ import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
-import org.springframework.batch.item.file.FlatFileParseException;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.batch.item.file.transform.FieldSet;
-import org.springframework.batch.repeat.RepeatStatus;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.TaskExecutor;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.validation.BindException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 @Slf4j
@@ -66,10 +55,9 @@ public class TsvFileProcessConfiguration {
     private final JobCompletionNotificationListener jobCompletionListener;
 
 
-    private final static String GET_BASE_URL="http://localhost:3000/item";
+    private final static String GET_BASE_URL = "http://localhost:3000/item";
 
-    private final static int CHUNK_SIZE=10;
-
+    private final static int CHUNK_SIZE = 10;
 
 
     // About partitioner
@@ -92,7 +80,7 @@ public class TsvFileProcessConfiguration {
         return stepBuilderFactory.get("partitionStep")
                 .partitioner("tsvFileProcessStep", partitioner(null))
 //                .partitioner("step99", partitioner(null))
-                .gridSize(4)
+                .gridSize(8)
 //                .step(step99(null))
                 .step(tsvFileProcessStep())
                 .taskExecutor(taskExecutor())
@@ -102,16 +90,8 @@ public class TsvFileProcessConfiguration {
 
     @Bean
     @JobScope
-    public CustomMultiResourcePartitioner partitioner(@Value("#{jobParameters[inputFile]}") String inputFile) {
-        System.out.println("-------------------------------");
-        System.out.println(inputFile);
-        System.out.println("-------------------------------");
-        CustomMultiResourcePartitioner partitioner = new CustomMultiResourcePartitioner();
-
-        Resource resource;
-        resource = new FileSystemResource(inputFile);
-
-//        //Resource[] resources;
+    public CustomMultiResourcePartitioner partitioner(@Value("#{jobParameters[inputFilePath]}") String inputFilePath) {
+        //Resource[] resources;
 //        Resource resource;
 //        try {
 //            //resources = resourcePatternResolver.getResources("file:src/main/resources/input/*part*.tsv");
@@ -120,24 +100,10 @@ public class TsvFileProcessConfiguration {
 //            throw new RuntimeException("I/O problems when resolving the input file pattern.", e);
 //        }
 //        partitioner.setResources(resource);
-        partitioner.setResource(resource);
+        CustomMultiResourcePartitioner partitioner = new CustomMultiResourcePartitioner();
+        partitioner.setInputFilePath(inputFilePath);
         return partitioner;
     }
-
-//
-//    @Bean
-//    @JobScope
-//    public Step step99(@Value("#{stepExecutionContext[fileName]}") String filename) {
-//        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-//        log.info(filename);
-//        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-//        return stepBuilderFactory.get("step99")
-//                .tasklet((stepContribution, chunkContext) -> {
-//                    log.info(">>> This is Step1");
-//                    return RepeatStatus.FINISHED;
-//                })
-//                .build();
-//    }
 
 
     @Bean
@@ -152,18 +118,16 @@ public class TsvFileProcessConfiguration {
     }
 
 
-
     @Bean
     public TaskExecutor taskExecutor() {
         return new SimpleAsyncTaskExecutor("Batch_task");
     }
 
 
-
     @Bean
     @StepScope
     //public FlatFileItemReader<SSItem> tsvReader(@Value("#{jobParameters[inputFile]}") String inputFilePath) {
-    public FlatFileItemReader<SSItem> tsvReader(@Value("#{stepExecutionContext[splitFile]}") String splitFile)  {
+    public FlatFileItemReader<SSItem> tsvReader(@Value("#{stepExecutionContext[splitFile]}") String splitFile) {
         log.info(System.getProperty("os.name").toLowerCase());
 
         System.out.println("===========================");
@@ -187,35 +151,31 @@ public class TsvFileProcessConfiguration {
     public ItemWriter<? super SSItem> tsvWriter(@Value("#{stepExecutionContext[doneFile]}") String doneFile) {
 
         StringBuffer sbf = new StringBuffer();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        //TODO: FLUSH & CLOSE ISSUE
-        BufferedWriter writer = null;
-        try {
-            writer = getWriter(doneFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        BufferedWriter writer2 = writer;
-
-//        StringBuilder sbf = new StringBuilder();
+        BatchFileManager fileManager = new BatchFileManager();
+        BufferedWriter writer = fileManager.getWriter(doneFile);
 
         return new ItemWriter<SSItem>() {
+
+            String lineContents = null;
+
+
+
+
+
             @Override
-            public void write(List<? extends SSItem> items) throws Exception {
+            public void write(List<? extends SSItem> items) {
 
                 SSItemResponseModel resItem = null;
                 //ResponseEntity<String> response = null;
                 String response = null;
                 String json = null;
-                for(SSItem item: items) {
+                for (SSItem item : items) {
 
                     //log.info("((((((((("+doneFile+")))))))))))))");
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
 
-
-                   // System.out.println(response.getStatusCode());
+                    // System.out.println(response.getStatusCode());
 //                    ResponseEntity<String> response = restTemplate.getForEntity(GET_BASE_URL,String.class);
 //                    String json = response.getBody();
 //                    SSItemResponseModel resItem = objectMapper.readValue(json, SSItemResponseModel.class);
@@ -235,20 +195,16 @@ public class TsvFileProcessConfiguration {
 //                    System.out.println(MDC.get("IAM"));
 
 
-
 //                    String contents =sbf.append(resItem.getShopId())
 //                            .append("\t")
 //                            .append(resItem.getMngNumber()).toString();
 
-                    String contents =sbf.append("1111")
+                    lineContents = sbf.append(item.getShopId())
                             .append("\t")
-                            .append("2222").toString();
-
-                    writeLineToFile(writer2, contents);
+                            .append(item.getMngNumber()).toString();
 
 
-
-
+                    fileManager.writeLineToFile(writer, lineContents);
 
                     sbf.setLength(0);
 
@@ -257,10 +213,10 @@ public class TsvFileProcessConfiguration {
         };
     }
 
-    public ItemProcessor<? super SSItem,? extends SSItem> tsvProcessor() {
+    public ItemProcessor<? super SSItem, ? extends SSItem> tsvProcessor() {
         //return item -> new SSItem(item.getShopId(), item.getItemId());
         return item -> {
-            if(item.getShopId() == 99999){
+            if (item.getShopId() == 99999) {
                 //throw new RuntimeException("!!!!!!!!!!!!!!!!!!");
                 log.error(">>>>>>> 99999 is illegal shop. I will skip this.");
                 return null;
@@ -282,22 +238,6 @@ public class TsvFileProcessConfiguration {
     }
 
 
-    private void writeLineToFile(BufferedWriter writer, String line) throws IOException {
-
-        //Default buffer is 8192 byte
-
-//        BufferedWriter writer = new BufferedWriter
-//                (new OutputStreamWriter(new FileOutputStream(filePath, true), StandardCharsets.UTF_8));
-
-//        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
-        writer.write(line);
-        writer.newLine();
-        //writer.flush();
-        //writer.close();
-    }
-
-
-
     private BufferedWriter getWriter(String filePath) throws IOException {
 
         //Default buffer is 8192 byte
@@ -313,7 +253,6 @@ public class TsvFileProcessConfiguration {
 //                            contents.getBytes("utf-8"),
 //    StandardOpenOption.CREATE,
 //    StandardOpenOption.APPEND);
-
 
 
 //    @Bean

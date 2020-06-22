@@ -9,8 +9,7 @@ public class SingletonExitCode {
 
     private static SingletonExitCode instance = new SingletonExitCode();
 
-    private SingletonExitCode() {
-    }
+    private SingletonExitCode() {}
 
     public static SingletonExitCode getInstance() {
         return instance;
@@ -19,7 +18,6 @@ public class SingletonExitCode {
     public void setErrorExitExit(){
         this.exitCode = ERROR_EXIT;
     }
-
 
     public int getExitCode() {
         return exitCode;
