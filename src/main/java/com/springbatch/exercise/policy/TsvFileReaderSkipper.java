@@ -24,6 +24,9 @@ public class TsvFileReaderSkipper implements SkipPolicy {
         if (exception instanceof FlatFileParseException) {
 
             return true;
+        } else if (exception instanceof IllegalArgumentException) {
+            log.error("I will handele this...");
+            return true;
         }
         return false;
     }
