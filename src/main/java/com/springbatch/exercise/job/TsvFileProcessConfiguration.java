@@ -10,6 +10,7 @@ import com.springbatch.exercise.policy.TsvFileReaderSkipper;
 import com.springbatch.exercise.utils.BatchFileManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.webresources.FileResource;
 import org.slf4j.MDC;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -21,8 +22,11 @@ import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
+import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
+import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
+import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.batch.item.file.transform.FieldSet;
 import org.springframework.batch.item.support.CompositeItemProcessor;
@@ -82,7 +86,7 @@ public class TsvFileProcessConfiguration {
         return stepBuilderFactory.get("partitionStep")
                 .partitioner("tsvFileProcessStep", partitioner(null))
 //                .partitioner("step99", partitioner(null))
-                .gridSize(3)
+                .gridSize(4)
 //                .step(step99(null))
                 .step(tsvFileProcessStep())
                 .taskExecutor(taskExecutor())
@@ -131,12 +135,7 @@ public class TsvFileProcessConfiguration {
     @StepScope
     //public FlatFileItemReader<SSItem> tsvReader(@Value("#{jobParameters[inputFile]}") String inputFilePath) {
     public FlatFileItemReader<SSItem> tsvReader(@Value("#{stepExecutionContext[splitFile]}") String splitFile) {
-        log.info(System.getProperty("os.name").toLowerCase());
 
-        System.out.println("===========================");
-        System.out.println(splitFile);
-        System.out.println("===========================");
-        MDC.put("IAM", Thread.currentThread().getName());
         return new FlatFileItemReaderBuilder<SSItem>()
                 .name("tsvReader")
                 //.resource(new ClassPathResource("input/" + filename))
@@ -151,78 +150,35 @@ public class TsvFileProcessConfiguration {
 
     @Bean
     @StepScope
-    public ItemWriter<? super SSItem> tsvWriter(@Value("#{stepExecutionContext[doneFile]}") String doneFile) {
+    public FlatFileItemWriter<SSItem> tsvWriter(@Value("#{stepExecutionContext[doneFile]}") String doneFile) {
+        //Create writer instance
+        FlatFileItemWriter<SSItem> writer = new FlatFileItemWriter<>();
 
-        StringBuffer sbf = new StringBuffer();
-        BatchFileManager fileManager = new BatchFileManager();
-        BufferedWriter writer = fileManager.getWriter(doneFile);
+        //Set output file location
+        writer.setResource(new FileSystemResource(doneFile));
 
-        return new ItemWriter<SSItem>() {
+        //All job repetitions should "append" to same output file
+        writer.setAppendAllowed(true);
 
-            String lineContents = null;
-
-
-
-
-
-            @Override
-            public void write(List<? extends SSItem> items) throws IOException {
-
-                SSItemResponseModel resItem = null;
-                //ResponseEntity<String> response = null;
-                String response = null;
-                String json = null;
-                for (SSItem item : items) {
-
-                    //log.info("((((((((("+doneFile+")))))))))))))");
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-
-                    // System.out.println(response.getStatusCode());
-//                    ResponseEntity<String> response = restTemplate.getForEntity(GET_BASE_URL,String.class);
-//                    String json = response.getBody();
-//                    SSItemResponseModel resItem = objectMapper.readValue(json, SSItemResponseModel.class);
-//
-                    ///PERFORMANCE???
-                    //response = restTemplate.getForObject(GET_BASE_URL,String.class);
-//                    json = response.getBody();
-                    //resItem = objectMapper.readValue(json, SSItemResponseModel.class);
-
-
-                    //SSItemResponseModel resItem = objectMapper.readValue(json, SSItemResponseModel.class);
-//                    System.out.println(item);
-//                    Thread currentThread = Thread.currentThread();
-//                    System.out.println(currentThread.getId());
-//                    System.out.println(currentThread.getName());
-//                    System.out.println("========MDC==========");
-//                    System.out.println(MDC.get("IAM"));
-
-
-//                    String contents =sbf.append(resItem.getShopId())
-//                            .append("\t")
-//                            .append(resItem.getMngNumber()).toString();
-
-                    lineContents = sbf.append(item.getShopId())
-                            .append("\t")
-                            .append(item.getMngNumber()).toString();
-
-
-                    fileManager.writeLineToFile(writer, lineContents);
-
-                    sbf.setLength(0);
-
-                }
-                writer.flush();
-
+        //Name field values sequence based on object properties
+        writer.setLineAggregator(new DelimitedLineAggregator<SSItem>() {
+            {
+                setDelimiter("\t");
+                setFieldExtractor(new BeanWrapperFieldExtractor<SSItem>() {
+                    {
+                        setNames(new String[]{"shopId", "mngNumber"});
+                    }
+                });
             }
-        };
+        });
+        return writer;
     }
 
     @Bean
-    public CompositeItemProcessor compositeProcessor(){
+    public CompositeItemProcessor compositeProcessor() {
         List<ItemProcessor> delegates = new ArrayList<>(2);
         delegates.add(processor1(null));
-        delegates.add(processor2());
+        delegates.add(processor2(null));
 
         CompositeItemProcessor processor = new CompositeItemProcessor<>();
         processor.setDelegates(delegates);
@@ -232,38 +188,135 @@ public class TsvFileProcessConfiguration {
     @Bean
     @StepScope
     public ItemProcessor<SSItem, SSItem> processor1(@Value("#{stepExecutionContext[skippedFile]}") String skippedFile) {
-        return item -> {
-            log.info("===PROCESSOR1111111111111111111====");
-            log.info(skippedFile);
-            if (item.getShopId() == 33333) {
-                throw new IllegalArgumentException(item.toString());
-            }
-            return item;
-        };
+        return new Processor1(skippedFile);
     }
 
-    public ItemProcessor<SSItem, SSItem> processor2() {
+//    @Bean
+//    @StepScope
+//    public ItemProcessor<SSItem, SSItem> processor1(@Value("#{stepExecutionContext[skippedFile]}") String skippedFile) {
+//        return item -> {
+//            //log.info("===PROCESSOR1111111111111111111====");
+//            //log.info(skippedFile);
+//            if (item.getShopId() == 33333) {
+//                String line = new StringBuilder()
+//                        .append(item.getShopId())
+//                        .append("\t")
+//                        .append(item.getMngNumber())
+//                        .toString();
+//
+//                BatchFileManager fileManager = new BatchFileManager();
+//                fileManager.writeLineToFile(fileManager.getWriter(skippedFile), line);
+//
+//                return null;
+//            }
+//            return item;
+//        };
+//    }
+
+
+    @Bean
+    @StepScope
+    public ItemProcessor<SSItem, SSItem> processor2(@Value("#{stepExecutionContext[skippedFile]}") String skippedFile) {
         return item -> {
 
-            log.info("===PROCESSOR2222222222222222222====");
+            //log.info("===PROCESSOR2222222222222222222====");
             if (item.getShopId() == 44444) {
-                throw new IllegalArgumentException(item.toString());
-            }
-            return item;
-        };
-    }
+                String line = new StringBuilder()
+                        .append(item.getShopId())
+                        .append("\t")
+                        .append(item.getMngNumber())
+                        .toString();
 
-    public ItemProcessor<? super SSItem, ? extends SSItem> tsvProcessor() {
-        //return item -> new SSItem(item.getShopId(), item.getItemId());
-        return item -> {
-            if (item.getShopId() == 99999) {
-                //throw new RuntimeException("!!!!!!!!!!!!!!!!!!");
-                log.error(">>>>>>> 99999 is illegal shop. I will skip this.");
+                BatchFileManager fileManager = new BatchFileManager();
+                fileManager.writeLineToFile(fileManager.getWriter(skippedFile), line);
+
                 return null;
             }
             return item;
         };
     }
+
+
+//    @Bean
+//    @StepScope
+//    public ItemWriter<? super SSItem> tsvWriter(@Value("#{stepExecutionContext[doneFile]}") String doneFile) {
+//
+//        StringBuffer sbf = new StringBuffer();
+//        BatchFileManager fileManager = new BatchFileManager();
+//        BufferedWriter writer = fileManager.getWriter(doneFile);
+//
+//        return new ItemWriter<SSItem>() {
+//
+//            String lineContents = null;
+//
+//
+//
+//
+//
+//            @Override
+//            public void write(List<? extends SSItem> items) throws IOException {
+//
+//                SSItemResponseModel resItem = null;
+//                //ResponseEntity<String> response = null;
+//                String response = null;
+//                String json = null;
+//                for (SSItem item : items) {
+//
+//                    //log.info("((((((((("+doneFile+")))))))))))))");
+////        HttpHeaders headers = new HttpHeaders();
+////        headers.setContentType(MediaType.APPLICATION_JSON);
+//
+//                    // System.out.println(response.getStatusCode());
+////                    ResponseEntity<String> response = restTemplate.getForEntity(GET_BASE_URL,String.class);
+////                    String json = response.getBody();
+////                    SSItemResponseModel resItem = objectMapper.readValue(json, SSItemResponseModel.class);
+////
+//                    ///PERFORMANCE???
+//                    //response = restTemplate.getForObject(GET_BASE_URL,String.class);
+////                    json = response.getBody();
+//                    //resItem = objectMapper.readValue(json, SSItemResponseModel.class);
+//
+//
+//                    //SSItemResponseModel resItem = objectMapper.readValue(json, SSItemResponseModel.class);
+////                    System.out.println(item);
+////                    Thread currentThread = Thread.currentThread();
+////                    System.out.println(currentThread.getId());
+////                    System.out.println(currentThread.getName());
+////                    System.out.println("========MDC==========");
+////                    System.out.println(MDC.get("IAM"));
+//
+//
+////                    String contents =sbf.append(resItem.getShopId())
+////                            .append("\t")
+////                            .append(resItem.getMngNumber()).toString();
+//
+//                    lineContents = sbf.append(item.getShopId())
+//                            .append("\t")
+//                            .append(item.getMngNumber()).toString();
+//
+//
+//                    fileManager.writeLineToFile(writer, lineContents);
+//
+//                    sbf.setLength(0);
+//
+//                }
+//                writer.flush();
+//
+//            }
+//        };
+//    }
+
+
+//    public ItemProcessor<? super SSItem, ? extends SSItem> tsvProcessor() {
+//        //return item -> new SSItem(item.getShopId(), item.getItemId());
+//        return item -> {
+//            if (item.getShopId() == 99999) {
+//                //throw new RuntimeException("!!!!!!!!!!!!!!!!!!");
+//                return null;
+//            }
+//            return item;
+//        };
+//    }
 
 
     private static class SSItemSetMapper implements FieldSetMapper<SSItem> {
@@ -277,42 +330,5 @@ public class TsvFileProcessConfiguration {
         }
     }
 
-
-    private BufferedWriter getWriter(String filePath) throws IOException {
-
-        //Default buffer is 8192 byte
-
-        return new BufferedWriter
-                (new OutputStreamWriter(new FileOutputStream(filePath, true), StandardCharsets.UTF_8));
-
-    }
-
-
-//
-//                    java.nio.file.Files.write(Paths.get(file.toURI()),
-//                            contents.getBytes("utf-8"),
-//    StandardOpenOption.CREATE,
-//    StandardOpenOption.APPEND);
-
-
-//    @Bean
-//    public TaskExecutor taskExecutor() {
-//        ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
-//        taskExecutor.setMaxPoolSize(5);
-//        taskExecutor.setCorePoolSize(5);
-//        taskExecutor.setQueueCapacity(5);
-//        taskExecutor.afterPropertiesSet();
-//        return taskExecutor;
-//    }
-
-    //
-//    @Bean
-//    public Step destroyPool() {
-//        return stepBuilderFactory.get("destroypool")
-//                .partitioner("tsvFileProcessStep", partitioner())
-//                .step(tsvFileProcessStep())
-//                .taskExecutor(taskExecutor())
-//                .build();
-//    }
 
 }

@@ -68,6 +68,8 @@ public class BatchFileManager {
         try {
             writer.write(line);
             writer.newLine();
+            writer.flush();
+            writer.close();
         } catch (IOException e) {
             log.error(String.format("Write file content failed. line: {}",line));
             throw new RuntimeException(e);
